@@ -30,8 +30,7 @@ class FileAdder
 
     protected ?Filesystem $filesystem;
 
-    // NOTE: A hacky-fix for an issue related to Advanced-Nova-Media-Library package.
-    protected bool $preserveOriginal = true;
+    protected bool $preserveOriginal = false;
 
     /** @var \Symfony\Component\HttpFoundation\File\UploadedFile|string */
     protected $file;
@@ -432,7 +431,10 @@ class FileAdder
             if ($fileAdder->file instanceof RemoteFile) {
                 Storage::disk($fileAdder->file->getDisk())->delete($fileAdder->file->getKey());
             } else {
-                unlink($fileAdder->pathToFile);
+                // NOTE: A hacky-fix for an issue related to Advanced-Nova-Media-Library package.
+                // BUG: Removed because it interupts newly uploaded media by deleting the
+                //        original temporary file(s).
+                // unlink($fileAdder->pathToFile);
             }
         }
 
