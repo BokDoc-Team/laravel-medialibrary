@@ -30,7 +30,8 @@ class FileAdder
 
     protected ?Filesystem $filesystem;
 
-    protected bool $preserveOriginal = false;
+    // NOTE: A hacky-fix for an issue related to Advanced-Nova-Media-Library package.
+    protected bool $preserveOriginal = true;
 
     /** @var \Symfony\Component\HttpFoundation\File\UploadedFile|string */
     protected $file;
